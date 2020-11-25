@@ -1,0 +1,26 @@
+Sign Up Form Outline
+
+Roles:
+  1. Email signup (for verification)
+  2. Create your profile
+  3. System
+
+Email signup
+  1. Get email 
+  2. Send verification email 
+  3. Encrypt email (for security)
+
+Create Your profile
+  1. Name
+  2. Age
+  3. Birthdate
+  4. Gender
+  5. Username
+  6. Password
+  7. Password verification (confirm password by re-typing)
+
+System
+  1. Store email
+  2. Store profile
+  3. Check if username is already in use 
+
