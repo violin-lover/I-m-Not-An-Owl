@@ -1,7 +1,8 @@
 const express = require('express'); 
 const sha1 = require("sha1");
-
 const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
+const sendMail = require('./lib/sendEmail.js')
 
 const app = express();
 
@@ -10,19 +11,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
+//will send the new user a link to the signup form
 
-app.get("/signup/:email", (req, res) => {
+app.get("/verify/:email", (req, res) => {
   //receive email, form a link, send email with the link
   let email = req.params.email;
-  console.log(email);
-  
-  res.json({"success": email});
+    console.log(email);
+    sendMail(email)
+    res.json({"success" : email});
 })
 
 const cors = require('cors');
 
 // set up port
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
+
+app.use(bodyParser.json())
 app.use(cors());
 
 // add routes
