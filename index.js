@@ -16,7 +16,7 @@ app.use(express.static('public'));
 app.get("/verify/:email", (req, res) => {
   //receive email, form a link, send email with the link
   let email = req.params.email;
-    console.log(email);
+    console.log("verifying" + " " + email);
     sendMail(email)
     res.json({"success" : email});
 })
