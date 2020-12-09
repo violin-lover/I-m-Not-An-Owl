@@ -3,68 +3,74 @@
     <head>
       <link rel = "stylesheet" href= "style.css">
     </head>
-    <body>
-        <h1>You're So Close to Getting Your Owl!</h1>
+<body>
+        <h1>Hoot hoot! Your owl will be ariving soon!</h1>
+        <p>The new owl service awaits you! Hoot hoot!™</p>
         <br>
         <br>
         <p>
         First name:
-        <br />
-        <input type="text" id="firstName" onchange="checkFirstName(this)" />
-        <br />
+		    <br>
+        <input type="text" name="First Name" onchange="checkFirstName(this)" />
+        <br> 
         <br>
         Last name:
-        <br />
-        <input type="text" id="lastName" onchange="checkLastName(this)" />
-        <br />
+        <br>
+        <input type="text" name="Last Name" onchange="checkLastName(this)" />
+        <br>
+        <br>
+        Username:
+        <br>
+        <input type="text" id = "user" />
+        <br>
         <br>
         Birthday (mm/dd/yy):
         <br />
-        <input type="date" id="birthday" onchange="checkBirthday(this)" />
+        <input type="date" id="birthday" onchange="checkBirthday()" />
+        <br>
         <br />
-        <br>
-        Username:
-        <input type="text" id="username" />*
-        <br>
-        <br>
-        Password :
+        Password:
         <br />
-        <input type="password" id="password" onchange="checkPassword(this)" />
-        <br>
-        <br>
-        <button type = "button" id = "submit">Submit</button>
-
+          <input type="password" id="Password" onchange="checkPassword(this)" />
         <script>
-            /*function checkFirstName(firstnameInput) {
-                if (firstnameInput.value.length < 2) {
-                    firstnameInput.focus();
-                    alert("Your name is too short:" + firstnameInput.value);
-                } else {
-                    firstnameInput.value = toProperCase(firstnameInput.value);
-                }
-                localStorage.setItem("firstname", firstnameInput.value);
-            }
+           function checkFirstName(firstnameInput) {
 
-            function checkLastName(lastnameInput) {
-                if (lastnameInput.value.length < 2) {
-                    lastnameInput.focus();
-                    alert("Your name is too short:" + lastnameInput.value);
-                } else {
-                    lastnameInput.value = toProperCase(lastnameInput.value);
-                }
-                localStorage.setItem("lastname", lastnameInput.value);
+            if (firstnameInput.value.length < 2) {
+                firstnameInput.focus();
+                alert("Your name is too short: " + firstnameInput.value);
+            } else {
+                firstnameInput.value = toProperCase(firstnameInput.value);
             }
+            localStorage.setItem("firstname", firstnameInput.value)
+        }
 
-             function checkAge(ageInput) {
-            if (ageInput.value < 5) {
-                ageInput.focus();
-                alert("Unfortunately, you must be older than 5 years old.:" + ageInput.value);
+        function checkLastName(lastnameInput) {
+
+            if (lastnameInput.value.length < 2) {
+                lastnameInput.focus();
+                alert("Your name is too short:" + lastnameInput.value);
+            } else {
+                lastnameInput.value = toProperCase(lastnameInput.value);
             }
-            if (ageInput.value > 100) {
+            localStorage.setItem("lastname", lastnameInput.value)
+        }
+
+        function toProperCase(username) {
+            return username.slice(0, 1).toUpperCase() + username.slice(1).toLowerCase()
+        };
+
+          function checkAge() {
+            let ageInput = document.getelementById("birthday").value;
+            if (ageInput < 5) {
                 ageInput.focus();
-                alert("Unfortunately, you must be younger than 100 years old.:" + ageInput.value);
+                alert("Unfortunately, you must be older than 5 years old.:" + ageInput);
+            }
+            if (ageInput > 100) {
+                ageInput.focus();
+                alert("Unfortunately, you must be younger than 100 years old.:" + ageInput);
             }
         }
+        
         function checkPassword(passwordInput) {
             if (passwordInput.value.length < 8) {
                 alert("Your password needs to be at least 8 digits long.")
@@ -83,21 +89,33 @@
             if (!hasNumber) {
                 alert("Your password needs to have a number!")
             }
-        }*/
+        }
+
 
         function gather(){
-          debugger;
           let user = document.getElementById("user").value;
           let pass = document.getElementById("Password").value;
           let search = window.location.search;
           let params = new URLSearchParams(search);
-          let yay = params.get(search);
+          let yay = params.get("e");
           let info = {
             email:yay,
             username:user,
             password:pass
           }
-        }
+          fetch('/api/sign-up', {
+            method: 'post',
+            headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+             },
+           body: JSON.stringify(info)
+          }).then(res=>res.json()).then(res => console.log(res));
+        }6
+
         </script>
+         <br>
+         <br>
+        <button type = "button" onclick = "gather()"> Get Hooting! </button>
     </body>
 </html>
