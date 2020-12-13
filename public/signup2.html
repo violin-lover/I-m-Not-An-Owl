@@ -19,14 +19,12 @@
         <input type="text" name="Last Name" onchange="checkLastName(this)" />
         <br>
         <br>
+        Birthday (mm/dd/yy):
+        <br />
+        <input type="date" id="birthday"/>
         Username:
         <br>
         <input type="text" id = "user" />
-        <br>
-        <br>
-        Birthday (mm/dd/yy):
-        <br />
-        <input type="date" id="birthday" onchange="checkBirthday()" />
         <br>
         <br />
         Password:
@@ -58,18 +56,6 @@
         function toProperCase(username) {
             return username.slice(0, 1).toUpperCase() + username.slice(1).toLowerCase()
         };
-
-          function checkAge() {
-            let ageInput = document.getelementById("birthday").value;
-            if (ageInput < 5) {
-                ageInput.focus();
-                alert("Unfortunately, you must be older than 5 years old.:" + ageInput);
-            }
-            if (ageInput > 100) {
-                ageInput.focus();
-                alert("Unfortunately, you must be younger than 100 years old.:" + ageInput);
-            }
-        }
         
         function checkPassword(passwordInput) {
             if (passwordInput.value.length < 8) {
@@ -111,7 +97,7 @@
              },
            body: JSON.stringify(info)
           }).then(res=>res.json()).then(res => console.log(res));
-        }6
+        }
 
         </script>
          <br>

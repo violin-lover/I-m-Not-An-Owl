@@ -7,3 +7,13 @@ curl http://localhost:3000/api/sign-up -d '{username:"yayyyy@gmail.com"}'
 curl -d '{"email": "y_kenny@hotmail.com", "username":"Yuman", "password": "shdfkshdka", "password_repeat": "shdfkshdka"}' -H "Content-Type: application/json" http://localhost:3000/api/sign-up
 
 curl -d '{"username":"username123456", "password":"sadghyujtrgfed"}' -H "Content-Type: application/json" http://localhost:3000/api/login
+
+curl http://localhost:3000/api/secret-route -H "authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlheTEiLCJ1c2VySWQiOiJ0aGVvZGRlYXJ0aGxpbmcxM0BnbWFpbC5jb20iLCJpYXQiOjE2MDc4MzMzMjksImV4cCI6MTYwNzkxOTcyOX0.ZsY2VvEkBFtfTqzxEmF8dFEcS-jXrVzuwNylWjZ_T3M"
+
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlheTEiLCJ1c2VySWQiOiJ0aGVvZGRlYXJ0aGxpbmcxM0BnbWFpbC5jb20iLCJpYXQiOjE2MDc4MzQ4MjAsImV4cCI6MTYwNzkyMTIyMH0.ZuawcxW7NUxzxngHc-ufUOLdHjmZJYVjgszHBNmV0do"
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlheTEiLCJ1c2VySWQiOiJ0aGVvZGRlYXJ0aGxpbmcxM0BnbWFpbC5jb20iLCJpYXQiOjE2MDc4MzUzNTIsImV4cCI6MTYwODQ0MDE1Mn0.4e9p42683cQaCulaimXkkbtgTStzTHGlVhYdtRX7P_I
+
+curl http://localhost:3000/api/secret-route -H "authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlheTEiLCJ1c2VySWQiOiJ0aGVvZGRlYXJ0aGxpbmcxM0BnbWFpbC5jb20iLCJpYXQiOjE2MDc4MzUzNTIsImV4cCI6MTYwODQ0MDE1Mn0.4e9p42683cQaCulaimXkkbtgTStzTHGlVhYdtRX7P_I"
+
+curl http://localhost:3000/api/secret-route -H "authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InlheTEiLCJ1c2VySWQiOiJ0aGVvZGRlYXJ0aGxpbmcxM0BnbWFpbC5jb20iLCJpYXQiOjE2MDc4MzU1NDMsImV4cCI6MTYwODQ0MDM0M30.LowgPcBd7JEdfIZ0OseiJMBvAfH_J9zWrWM6Ns_3KwQ"
