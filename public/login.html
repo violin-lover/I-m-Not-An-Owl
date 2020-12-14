@@ -29,7 +29,8 @@
 
   <script>
     function getInfo(){
-            	let username = document.getElementById("username").value;
+            	debugger;
+              let username = document.getElementById("username").value;
             	let password = document.getElementById("password").value;
 							console.log(password)
             	let info = {
@@ -45,10 +46,10 @@
             	body: JSON.stringify(info)
             	})
             	.then(res=>res.json()).then(res=>{
-							console.log(res);
+							console.log("From fetch: " + res);
 							let token = res.token; 
 							localStorage.setItem("token" , token);
-							window.open("http://im-not-an-owl.snowkitty.repl.co/homepage.html" , "_parent");
+							window.open("https://im-not-an-owl.snowkitty.repl.co/homepage.html" , "_parent");
 							}
 							)
 						}

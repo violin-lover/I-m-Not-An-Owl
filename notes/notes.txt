@@ -18,6 +18,7 @@ Use Cases:
   10. User posts a hoot
   11. User re-hoots
   12. User friends other users
+  13. User reads hoots 
 
 System:
   1. Validates a signup users identity (i.e. email)
