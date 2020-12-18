@@ -1,12 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Owlery™</title>
+  <title>Owlery™</title>
+
+  <script>
+  function message(){
+     let post = document.getElementById("post").value;
+     let tok = localStorage.getItem("token");
+     let info = {
+            message:post
+          }
+          fetch('/api/post-message', {
+            method: 'post',
+            headers: {
+            'Authorization': 'bearer ' + tok,
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+             },
+           body: JSON.stringify(info)
+          }).then(res=>res.json()).then(res => {
+            console.log(res);
+  })
+  }
+  </script>
 </head>
-<body>
-
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
-
-</body>
+<center><body>
+<h1>Owlery - Home</h1>
+<p>Welcome to your home!</p>
+<br>
+<br>
+<center>
+<textarea id = "post" rows = "10" cols = "70">Post something here...</textarea>
+<br>
+<br>
+<button type = "button" id = "post" onclick = "message()"> Send out owl</button>
+</center>
+</body></center>
 </html>
