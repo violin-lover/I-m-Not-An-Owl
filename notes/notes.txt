@@ -5,27 +5,27 @@ Roles:
   2. System: this happens behind the scenes
 
 Use Cases:
-  1. New user signup
+  1. New user signup ✔️
   2. User changes/resets password
   3. When user forgets their password
-  4. User sets up/changes profile 
+  4. User sets up/changes profile  
     ~Profile includes nickname, contact info, facts about themself, etc.
   5. User finds other users
   6. User follows other users
   7. User retrieves feeds from the user they follow
   8. Liking a hoot
   9. Replying to a hoot
-  10. User posts a hoot
+  10. User posts a hoot ✔️
   11. User re-hoots
   12. User friends other users
-  13. User reads hoots 
+  13. User reads hoots ✔️
 
 System:
-  1. Validates a signup users identity (i.e. email)
-  2. Stores a users credentials (username & password)
-  3. Stores hoots 
+  1. Validates a signup users identity (i.e. email) ✔️
+  2. Stores a users credentials (username & password) ✔️
+  3. Stores hoots  ✔️
   4. Recommends interesting hoots to the user 
   5. Store relationships between users
-  6. Send emails with system account 
+  6. Send emails with system account  ✔️
 
 

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const uuid = require('uuid');
 const jwt = require('jsonwebtoken');
 const db = require('../lib/db.js');
 
@@ -10,7 +9,20 @@ const userMiddleware = require('../middleware/users.js');
 router.get('/secret-route', userMiddleware.isLoggedIn, (req, res, next) => {
   console.log(req.userData);
   res.send('Welcome!' + req.userData.username + 'This is the secret content. Only logged in users can see that!');
+});
 
+router.get('/read-message', userMiddleware.isLoggedIn, (req, res, next) => {
+  console.log(req.userData);
+          db.query(
+              `SELECT * FROM Messages`,
+              (err, result) => {
+                if (err) {
+                  throw err;
+                }
+                console.log(result)
+                 res.json(result);
+              }
+            );
 });
 
 router.post('/post-message', userMiddleware.isLoggedIn, (req, res, next) => {
