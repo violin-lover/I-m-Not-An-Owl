@@ -1,107 +1,115 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Owlery™</title>
+    <head>
+        <title>Owlery™</title>
+        <script src = "he.js"></script>
 
-  <script>
-function message(){
-     let post = document.getElementById("post").value;
-     let token = localStorage.getItem("token");
-     let info = {
-            message:post
-          }
-          fetch('/api/post-message', {
-            method: 'post',
-            headers: {
-            'Authorization': 'bearer ' + token,
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-             },
-           body: JSON.stringify(info)
-          }).then(res=>res.json()).then(res => {
-            console.log(res);
-  })
-  }
+        <script>
+            function message() {
+                let post = document.getElementById("post").value;
+                let token = localStorage.getItem("token");
+                post = he.encode(post)
+                
 
-  setInterval(
-     function readMessages(){
-  let feed = document.getElementById("feed");
-  let token = localStorage.getItem("token");
-  fetch('/api/read-message', {
-            method: 'get',
-            headers: {
-            'Authorization': 'bearer ' + token,
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-             }
-          }).then(res=>res.json()).then(res => {
-            console.log("lengthhhh: " + res.length);
-             displayFeed(res, feed);
-  })
-  },
-   3000);
+                let info = {
+                    message: post,
+                };
+                fetch("/api/post-message", {
+                    method: "post",
+                    headers: {
+                        Authorization: "bearer " + token,
+                        Accept: "application/json, text/plain, */*",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(info),
+                })
+                    .then((res) => res.json())
+                    .then((res) => {
+                        console.log(res);
+                    });
+            }
 
- 
+            setInterval(function readMessages() {
+                let feed = document.getElementById("feed");
+                let token = localStorage.getItem("token");
+                fetch("/api/read-message", {
+                    method: "get",
+                    headers: {
+                        Authorization: "bearer " + token,
+                        Accept: "application/json, text/plain, */*",
+                        "Content-Type": "application/json",
+                    },
+                })
+                    .then((res) => res.json())
+                    .then((res) => {
+                        console.log("lengthhhh: " + res.length);
+                        displayFeed(res, feed);
+                    });
+            }, 3000);
 
-  function displayFeed(res, feed) {
-    let tblHtml = `
+            function displayFeed(res, feed) {
+                let tblHtml = `
     <ol>`;
-    for (const k of res) {
-        tblHtml += createRow(k);
-    }
-    tblHtml += `</ol>`;
-    feed.innerHTML = tblHtml;
-}
+                for (const k of res) {
+                    tblHtml += createRow(k);
+                }
+                tblHtml += `</ol>`;
+                feed.innerHTML = tblHtml;
+            }
 
-function createRow(k) {
-    debugger;
-    let age = ageOfMessage(k.posted_at)
+            function createRow(k) {
+                debugger;
+                let age = ageOfMessage(k.posted_at);
 
-    if(age <= 60){
-      age = Math.floor(age) + " minutes ago"
+                if (age <= 60) {
+                    age = Math.floor(age) + " minutes ago";
 
-      return `<li> <b>${k.author}</b>:<center><br> ${k.message} <p>Posted:</p> ${age}</li><br></center>`
-    }
+                    return `<li> <b>${k.author}</b>:<center> ${k.message}<br>Posted: ${age}</li><img src="photos/transparentHeart3.svg" width = "20px" height = "20px";cursor:pointer" 
+                    onclick="likePost()"></center><br><br>`;
 
-    else if(age >= 60 && age < 1440){
-      age = age/60
-      age = Math.floor(age) + "hours ago"
+                } else if (age >= 60 && age < 1440) {
+                    age = age / 60;
+                    age = Math.floor(age) + "hours ago";
 
-      return `<li> <b>${k.author}</b>:<center><br> ${k.message} <br>Posted: ${age}</li></center>`
-    }
+                    return `<li> <b>${k.author}</b>:<center>${k.message} <br> Posted: ${age}</li><img src="photos/transparentHeart3.svg" width = "20px" height = "20px";cursor:pointer" 
+                    onclick="likePost()"></center><br><br>`;
 
-    else {
-      age = age/1440
-      age = Math.floor(age) + "days ago"
+                } else {
+                    age = age / 1440;
+                    age = Math.floor(age) + "days ago";
 
-      return `<li> <b>${k.author}</b>:<center><br> ${k.message} <p>Posted:</p> ${age}</li><br></center>`      
-    }
-}
+                    return `<li> <b>${k.author}</b>:<center> ${k.message} <br>Posted:${age}</li><img src="photos/transparentHeart3.svg" width = "20px" height = "20px";cursor:pointer" 
+                    onclick="likePost()"></center><br><br>`;
+                }
+            }
 
-function ageOfMessage(time) {
-  let postedAt = new Date(time)
-  let currentTime = new Date()
+            function ageOfMessage(time) {
+                let postedAt = new Date(time);
+                let currentTime = new Date();
 
-  let difference = currentTime.getTime() - postedAt.getTime()
-  let age = (difference/60000).toFixed(0)
+                let difference = currentTime.getTime() - postedAt.getTime();
+                let age = (difference / 60000).toFixed(0);
 
-  return age;
-}
-  </script>
-</head>
-<center><body>
-<h1>Owlery - Home</h1>
-<p>Welcome to your home!</p>
-<br>
-<br>
-<center>
-<textarea id = "post" rows = "10" cols = "70">Post something here...</textarea>
-<br>
-<br>
-<button type = "button" id = "post" onclick = "message()"> Send out owl ^-^</button>
-</center>
-<br>
-<br>
-<div id = "feed"></div>
-</body></center>
+                return age;
+            }
+        </script>
+    </head>
+
+    <center>
+        <body>
+            <h1>Owlery - Home</h1>
+            <p>Welcome to your home!</p>
+            <br />
+            <br />
+            <center>
+                <textarea id="post" rows="10" cols="70">Post something here...</textarea>
+                <br />
+                <br />
+                <button type="button" id="post" onclick="message()">Send out owl ^-^</button>
+            </center>
+            <br />
+            <br />
+            <div id="feed"></div>
+        </body>
+    </center>
 </html>

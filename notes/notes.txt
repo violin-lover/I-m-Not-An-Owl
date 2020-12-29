@@ -19,6 +19,7 @@ Use Cases:
   11. User re-hoots
   12. User friends other users
   13. User reads hoots ✔️
+  14. User logs out
 
 System:
   1. Validates a signup users identity (i.e. email) ✔️

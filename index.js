@@ -20,6 +20,8 @@ app.get("/verifyemail/:email", (req, res) => {
   res.json({ "success": email});
 })
 
+app.get("/logout/",)
+
 
 // set up port
 const PORT = 3000;
