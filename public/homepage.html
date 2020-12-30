@@ -57,6 +57,26 @@
                 feed.innerHTML = tblHtml;
             }
 
+            function likePost(id){
+     let token = localStorage.getItem("token");
+      let info = {
+        "id":id
+       }
+          fetch('/api/like-message', {
+            method: 'post',
+            headers: {
+            'Authorization': 'bearer ' + token,
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json'
+             },
+           body: JSON.stringify(info)
+          }).then(res=>res.json()).then(res => {
+            console.log(res);
+            console.log("Liked successfully")
+
+  })
+}
+
             function createRow(k) {
                 debugger;
                 let age = ageOfMessage(k.posted_at);
@@ -64,22 +84,22 @@
                 if (age <= 60) {
                     age = Math.floor(age) + " minutes ago";
 
-                    return `<li> <b>${k.author}</b>:<center> ${k.message}<br>Posted: ${age}</li><img src="photos/transparentHeart3.svg" width = "20px" height = "20px";cursor:pointer" 
-                    onclick="likePost()"></center><br><br>`;
+                    return `<li> <b>${k.author}</b>:<center> ${k.message}<br>Posted:&nbsp;${age}</li><img src="photos/transparentHeart3.svg" width = "20px" height = "20px";cursor:pointer" 
+                    onclick="likePost(${k.id})">&nbsp;&nbsp;${k.post_likes}</center><br><br>`;
 
                 } else if (age >= 60 && age < 1440) {
                     age = age / 60;
-                    age = Math.floor(age) + "hours ago";
+                    age = Math.floor(age) + " hours ago";
 
-                    return `<li> <b>${k.author}</b>:<center>${k.message} <br> Posted: ${age}</li><img src="photos/transparentHeart3.svg" width = "20px" height = "20px";cursor:pointer" 
-                    onclick="likePost()"></center><br><br>`;
+                    return `<li> <b>${k.author}</b>:<center>${k.message} <br> Posted:&nbsp;${age}</li><img src="photos/transparentHeart3.svg" width = "20px" height = "20px";cursor:pointer" 
+                    onclick="likePost(${k.id})">&nbsp;&nbsp;${k.post_likes}</center><br><br>`;
 
                 } else {
                     age = age / 1440;
-                    age = Math.floor(age) + "days ago";
+                    age = Math.floor(age) + " days ago";
 
-                    return `<li> <b>${k.author}</b>:<center> ${k.message} <br>Posted:${age}</li><img src="photos/transparentHeart3.svg" width = "20px" height = "20px";cursor:pointer" 
-                    onclick="likePost()"></center><br><br>`;
+                    return `<li> <b>${k.author}</b>:<center> ${k.message} <br>Posted:&nbsp;${age}</li><img src="photos/transparentHeart3.svg" width = "20px" height = "20px";cursor:pointer" 
+                    onclick="likePost(${k.id})">&nbsp;&nbsp;${k.post_likes}</center><br><br>`;
                 }
             }
 
