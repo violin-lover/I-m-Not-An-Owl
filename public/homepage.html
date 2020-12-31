@@ -2,14 +2,14 @@
 <html>
     <head>
         <title>Owlery™</title>
-        <script src = "he.js"></script>
+        <script src="he.js"></script>
+        <link rel = "stylesheet" href= "style.css">
 
         <script>
             function message() {
                 let post = document.getElementById("post").value;
                 let token = localStorage.getItem("token");
-                post = he.encode(post)
-                
+                post = he.encode(post);
 
                 let info = {
                     message: post,
@@ -57,25 +57,26 @@
                 feed.innerHTML = tblHtml;
             }
 
-            function likePost(id){
-     let token = localStorage.getItem("token");
-      let info = {
-        "id":id
-       }
-          fetch('/api/like-message', {
-            method: 'post',
-            headers: {
-            'Authorization': 'bearer ' + token,
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-             },
-           body: JSON.stringify(info)
-          }).then(res=>res.json()).then(res => {
-            console.log(res);
-            console.log("Liked successfully")
-
-  })
-}
+            function likePost(id) {
+                let token = localStorage.getItem("token");
+                let info = {
+                    id: id,
+                };
+                fetch("/api/like-message", {
+                    method: "post",
+                    headers: {
+                        Authorization: "bearer " + token,
+                        Accept: "application/json, text/plain, */*",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(info),
+                })
+                    .then((res) => res.json())
+                    .then((res) => {
+                        console.log(res);
+                        console.log("Liked successfully");
+                    });
+            }
 
             function createRow(k) {
                 debugger;
@@ -92,7 +93,7 @@
                     age = Math.floor(age) + " hours ago";
 
                     return `<li> <b>${k.author}</b>:<center>${k.message} <br> Posted:&nbsp;${age}</li><img src="photos/transparentHeart3.svg" width = "20px" height = "20px";cursor:pointer" 
-                    onclick="likePost(${k.id})">&nbsp;&nbsp;${k.post_likes}</center><br><br>`;
+                    onclick="likePost(${k.id})">&nbsp;&nbsp;${k.post_likes}</center><br><br>`; 
 
                 } else {
                     age = age / 1440;

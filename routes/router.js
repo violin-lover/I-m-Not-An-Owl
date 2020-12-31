@@ -38,24 +38,29 @@ router.post("/post-message", userMiddleware.isLoggedIn, (req, res, next) => {
 });
 
 router.post("/like-message", userMiddleware.isLoggedIn, (req, res, next) => {
-    console.log(req.userData.username);
-    console.log(req.body.id);
-    db.query(
-        `UPDATE Messages 
-            SET post_likes = post_likes + 1
-            WHERE id = ${req.body.id}`,(err, result) => {
-              if (err) {
+    console.log("yay: " + req.userData.userId);
+    console.log("WORRRRRRRRRRRRRRRRK: " + req.body.id);
+    db.query(`SELECT * FROM user_likes WHERE userid = '${req.userData.userId}' and messageid = ${req.body.id}`,
+        (err, result) => {
+            console.log("select query completed :D");
+            if (err) {
+                console.log("error" + err);
                 throw err;
-                return res.status(400).send({
-                  msg: err,
-                })
-              }
-
-              return res.status(201).send({
-                msg: "Liked successfully"
-              })
             }
-  );
+            if (result.length == 0) {
+                console.log("there is nothing D:");
+                db.query(
+                    `UPDATE Messages 
+            SET post_likes = post_likes + 1
+            WHERE id = ${req.body.id}`
+                );
+                db.query(
+                  `INSERT INTO user_likes(userid, messageid, liked_time) VALUES ('${req.userData.userId}',${req.body.id},now())`
+                )
+            } else {
+                console.log("already liked!!");
+            }
+        });
 });
 
 router.post("/sign-up", userMiddleware.validateRegister, (req, res, next) => {
